@@ -1,0 +1,145 @@
+{
+  "sample_inputs": [
+    {
+      "id": "high_risk_example",
+      "label": "HIGH RISK — Contractor Agreement",
+      "text": "The contractor shall indemnify and hold harmless the Company from any and all claims. The Company may terminate this agreement immediately and without cause at its sole discretion. All intellectual property created shall be considered work for hire. The contractor waives any right to arbitration or class action proceedings."
+    },
+    {
+      "id": "medium_risk_example",
+      "label": "MEDIUM RISK — Vendor NDA",
+      "text": "Either party may terminate this agreement with a 30-day notice period. The vendor shall keep all client data confidential and shall not disclose any proprietary information to third parties without prior written consent. Disputes shall be resolved by arbitration under the governing law of Delaware."
+    },
+    {
+      "id": "low_risk_example",
+      "label": "LOW RISK — Payment Terms",
+      "text": "The Company shall pay the contractor a monthly retainer of $5,000 on the first business day of each month. All payments shall be made via bank transfer. Both parties agree to communicate in good faith regarding any disagreements."
+    }
+  ],
+  "sample_outputs": {
+    "high_risk_result": {
+      "clause_id": "high_risk_example",
+      "original_text": "The contractor shall indemnify and hold harmless the Company from any and all claims. The Company may terminate this agreement immediately and without cause at its sole discretion. All intellectual property created shall be considered work for hire. The contractor waives any right to arbitration or class action proceedings.",
+      "risk_level": "High",
+      "risk_score": 52,
+      "summary": "Significant legal risk. Do NOT sign without expert review. Score: 52.",
+      "flags": [
+        {
+          "flagged_term": "class action waiver",
+          "risk_category": "Dispute Resolution",
+          "risk_weight": "8/10",
+          "reason": "Prevents joining group lawsuits."
+        },
+        {
+          "flagged_term": "hold harmless",
+          "risk_category": "Liability",
+          "risk_weight": "8/10",
+          "reason": "Waives right to sue — may eliminate critical legal remedies."
+        },
+        {
+          "flagged_term": "without cause",
+          "risk_category": "Termination",
+          "risk_weight": "7/10",
+          "reason": "Enables dismissal with no reason — highly unfavorable."
+        },
+        {
+          "flagged_term": "work for hire",
+          "risk_category": "IP Rights",
+          "risk_weight": "7/10",
+          "reason": "Classifies work as employer-owned — creator loses all rights."
+        },
+        {
+          "flagged_term": "indemnify",
+          "risk_category": "Liability",
+          "risk_weight": "7/10",
+          "reason": "Requires one party to compensate the other for losses."
+        },
+        {
+          "flagged_term": "intellectual property",
+          "risk_category": "IP Rights",
+          "risk_weight": "6/10",
+          "reason": "Governs ownership of created work."
+        },
+        {
+          "flagged_term": "arbitration",
+          "risk_category": "Dispute Resolution",
+          "risk_weight": "6/10",
+          "reason": "Waives right to jury trial — limits appeal rights."
+        },
+        {
+          "flagged_term": "terminate",
+          "risk_category": "Termination",
+          "risk_weight": "5/10",
+          "reason": "Grants termination rights — risk depends on conditions."
+        },
+        {
+          "flagged_term": "waiver",
+          "risk_category": "Rights",
+          "risk_weight": "5/10",
+          "reason": "Gives up a legal right — often difficult to reverse."
+        }
+      ],
+      "categories": {
+        "Liability": ["hold harmless", "indemnify"],
+        "Termination": ["without cause", "terminate"],
+        "IP Rights": ["work for hire", "intellectual property"],
+        "Dispute Resolution": ["class action waiver", "arbitration"],
+        "Rights": ["waiver"]
+      }
+    },
+    "medium_risk_result": {
+      "clause_id": "medium_risk_example",
+      "original_text": "Either party may terminate this agreement with a 30-day notice period. The vendor shall keep all client data confidential and shall not disclose any proprietary information to third parties without prior written consent. Disputes shall be resolved by arbitration under the governing law of Delaware.",
+      "risk_level": "Medium",
+      "risk_score": 22,
+      "summary": "Notable risk factors. Legal review advisable. Score: 22.",
+      "flags": [
+        {
+          "flagged_term": "arbitration",
+          "risk_category": "Dispute Resolution",
+          "risk_weight": "6/10",
+          "reason": "Waives right to jury trial — limits appeal rights."
+        },
+        {
+          "flagged_term": "terminate",
+          "risk_category": "Termination",
+          "risk_weight": "5/10",
+          "reason": "Grants termination rights — risk depends on conditions."
+        },
+        {
+          "flagged_term": "confidential",
+          "risk_category": "Confidentiality",
+          "risk_weight": "4/10",
+          "reason": "Marks information as protected."
+        },
+        {
+          "flagged_term": "proprietary",
+          "risk_category": "IP Rights",
+          "risk_weight": "4/10",
+          "reason": "Marks info as exclusively owned — mishandling triggers liability."
+        },
+        {
+          "flagged_term": "governing law",
+          "risk_category": "Dispute Resolution",
+          "risk_weight": "4/10",
+          "reason": "Sets which jurisdiction's law applies."
+        }
+      ],
+      "categories": {
+        "Termination": ["terminate"],
+        "Confidentiality": ["confidential"],
+        "IP Rights": ["proprietary"],
+        "Dispute Resolution": ["arbitration", "governing law"]
+      }
+    },
+    "low_risk_result": {
+      "clause_id": "low_risk_example",
+      "original_text": "The Company shall pay the contractor a monthly retainer of $5,000 on the first business day of each month. All payments shall be made via bank transfer. Both parties agree to communicate in good faith regarding any disagreements.",
+      "risk_level": "Low",
+      "risk_score": 0,
+      "summary": "Minor risk indicators. Review recommended. Score: 0.",
+      "flags": [],
+      "categories": {}
+    }
+  }
+}

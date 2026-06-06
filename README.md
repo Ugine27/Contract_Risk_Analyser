@@ -5,19 +5,18 @@
 
 ---
 
-## 🧠 What It Does
+## What It Does
 
 The **Contract Clause Risk Analyzer** scans individual contract clauses and identifies legal risk indicators using interpretable, rule-based NLP. It produces a structured JSON report that explains *what* was flagged, *why* it's risky, and *how severe* the risk is.
 
 This project is designed to be:
-- ✅ **Interview-friendly** — every decision is explainable
-- ✅ **Colab-compatible** — runs in Google Colab with zero setup friction  
-- ✅ **Transparent** — no hidden model weights, no API calls
-- ✅ **Extensible** — add new keywords in one place
+- **Colab-compatible** — runs in Google Colab with zero setup friction  
+- **Transparent** — no hidden model weights, no API calls
+- **Extensible** — add new keywords in one place
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 | Component          | Technology                  |
 |--------------------|-----------------------------|
@@ -43,39 +42,8 @@ contract_risk_analyzer/
 
 ---
 
-## 🚀 Quick Start
 
-### Option A — Google Colab (Recommended)
-1. Open `Contract_Risk_Analyzer.ipynb` in [Google Colab](https://colab.research.google.com)
-2. Run all cells top-to-bottom (`Runtime → Run all`)
-3. Modify the last cell to analyze your own clauses
-
-### Option B — Local Python
-```bash
-# 1. Clone or download the repo
-git clone https://github.com/YOUR_USERNAME/contract-risk-analyzer.git
-cd contract-risk-analyzer
-
-# 2. Install dependency
-pip install -r requirements.txt
-
-# 3. Run
-python -c "
-from analyzer import ContractRiskAnalyzer
-import json
-
-analyzer = ContractRiskAnalyzer()
-result = analyzer.analyze(
-    'The contractor shall indemnify and hold harmless the Company from any claims.',
-    'my_clause'
-)
-print(json.dumps(result, indent=2))
-"
-```
-
----
-
-## 📊 Pipeline Overview
+## Pipeline Overview
 
 ```
 Raw Clause Text
@@ -101,7 +69,7 @@ Raw Clause Text
 
 ---
 
-## 📋 Sample Output
+## Sample Output
 
 **Input:**
 ```
@@ -145,7 +113,7 @@ The Company may terminate this agreement immediately and without cause."
 
 ---
 
-## 🔑 Risk Keyword Categories
+## Risk Keyword Categories
 
 | Category          | Example Keywords                                          |
 |-------------------|-----------------------------------------------------------|
@@ -159,42 +127,26 @@ The Company may terminate this agreement immediately and without cause."
 
 ---
 
-## 📈 Risk Scoring System
+## Risk Scoring System
 
 | Tier   | Score Range | Meaning                                          |
 |--------|-------------|--------------------------------------------------|
-| Low    | 0 – 14      | Minor indicators, routine review recommended     |
-| Medium | 15 – 29     | Notable risks, legal review advisable            |
-| High   | 30+         | Significant exposure, expert review required     |
+| Low    | 0 – 4      | Minor indicators, routine review recommended     |
+| Medium | 5 – 14     | Notable risks, legal review advisable            |
+| High   | 15+         | Significant exposure, expert review required     |
 
 Scores are the **sum of keyword weights** (each keyword weighted 1–10).
 
 ---
 
-## 🛠️ How to Extend
+## How to Extend
 
 Add new risk keywords in `analyzer.py` under `RISK_KEYWORDS`:
 
-```python
-"indemnify": {
-    "weight": 7,           # 1–10 risk severity
-    "category": "Liability",
-    "explanation": "Requires one party to compensate the other for losses."
-},
-```
-
-Multi-word phrases are automatically handled via regex:
-```python
-"hold harmless": {
-    "weight": 8,
-    "category": "Liability",
-    "explanation": "Waives right to sue..."
-},
-```
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - **TF-IDF weighting** — weight terms by rarity across a corpus of contracts
 - **Sentence-level output** — highlight the exact sentence containing each risk
@@ -206,16 +158,4 @@ Multi-word phrases are automatically handled via regex:
 
 ---
 
-## 🤝 Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
-
----
-
-## 📄 License
-
-MIT License — free to use, modify, and distribute.
-
----
-
-*Built without LLMs · Explainable by design · Interview-ready*
